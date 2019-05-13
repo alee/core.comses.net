@@ -66,7 +66,7 @@
         @Prop({default: null})
         public redirect: string | null;
 
-        public detailPageUrl(state) {
+        public redirectUrl(state) {
             this.state.identifier = state.identifier;
             const version_number = this.state.latest_version_number || '1.0.0';
             if (_.isNull(this._identifier)) {

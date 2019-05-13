@@ -30,11 +30,6 @@ def build_absolute_uri(relative_url):
 
 
 @library.global_function
-def render_bundle(bundle_name, extension=None, config='DEFAULT', attrs=''):
-    return wl.render_bundle(bundle_name, extension, config, attrs)
-
-
-@library.global_function
 def cookielaw(request):
     if request.COOKIES.get('cookielaw_accepted', False):
         return ''
@@ -74,7 +69,6 @@ def release_version():
 @library.global_function
 def is_production():
     return settings.DEPLOY_ENVIRONMENT.is_production() and not settings.DEBUG
-
 
 @library.global_function
 def deploy_environment():

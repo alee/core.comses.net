@@ -49,7 +49,6 @@ export interface FormComponent {
     statusMessages: Array<{ classNames: string, message: string }>;
     $emit: (...x: any[]) => void;
     validate(): Promise<any>;
-    detailPageUrl?(state): string;
 }
 
 export function baseHandleOtherError(response_or_network_error): string {
@@ -90,8 +89,8 @@ function baseHandleValidationError(responseError, component: FormComponent) {
     }
 }
 
-export class HandlerWithRedirect implements CreateOrUpdateHandler {
-    // Requires state and detailPageUrl properties to be present on component
+export class ServerResponseHandler implements CreateOrUpdateHandler {
+    // Requires state and redirectUrl properties to be present on component
 
     constructor(public component: FormComponent) {
     }
@@ -111,11 +110,11 @@ export class HandlerWithRedirect implements CreateOrUpdateHandler {
     }
 
     public handleSuccessWithDataResponse(response: AxiosResponse) {
-        changePage(this.component.detailPageUrl(response.data));
+        changePage(this.component.redirectUrl(response.data));
     }
 
     public handleSuccessWithoutDataResponse(response: AxiosResponse) {
-        changePage(this.component.detailPageUrl(response.data));
+        changePage(this.component.redirectUrl(response.data));
     }
 }
 
@@ -146,10 +145,9 @@ export class HandlerShowSuccessMessage implements CreateOrUpdateHandler {
         const data = response.response.data;
         if (Array.isArray(data)) {
             this.updateListServerValidationMessage(data);
-        }
-        else {
-            baseHandleValidationError(response, this.component)
-        }
+        } else {
+            baseHandleValidationError(response, this.component);
+        } 
     }
 
     public handleSuccessWithDataResponse(response: AxiosResponse) {

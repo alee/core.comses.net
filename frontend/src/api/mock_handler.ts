@@ -3,7 +3,8 @@ import {AxiosResponse} from 'axios';
 export {DismissOnSuccessHandler} from './handler';
 
 export class HandlerWithRedirect implements CreateOrUpdateHandler {
-        constructor(public component: FormComponent, public modelId?: string) {
+
+    constructor(public component: FormComponent, public modelId?: string) {
     }
 
     get state() {

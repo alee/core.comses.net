@@ -72,7 +72,7 @@ class EditJob extends createFormValidator(schema) {
     @Prop()
     public _id: number | null;
 
-    public detailPageUrl(state) {
+    public redirectUrl(state) {
         this.state.id = state.id;
         return api.detailUrl(this.state.id);
     }

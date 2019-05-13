@@ -145,7 +145,7 @@
 
         public initial_full_member: boolean = true;
 
-        public detailPageUrl(state) {
+        public redirectUrl(state) {
             return api.detailUrl(state.user_pk);
         }
 
